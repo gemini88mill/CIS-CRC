@@ -41,6 +41,7 @@ public class CRCMain {
         switch (mainMenuChoice){
             case 1:
                 //calculate CRC selected
+
                 break;
             case 2:
                 //Verify CRC selected
