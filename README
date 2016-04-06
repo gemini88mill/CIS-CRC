@@ -2,4 +2,36 @@ README
 
 THIS README IS FOR INSTRUCTIONS ON HOW TO USE THE PROGRAM... 
 
+CRC-16 Calculator and verifier. 
+
+This program is designed to calculate the CRC of a given file and appends it to the end for the file. 
+also if we are given a file that already has a CRC=16 attached to it it will be verified. 
+
+Program Structure: 
+
+This program will have 4 classes each with its own set of methods. Each class is represented by the MENU 
+on the beginning prompt for the user. plus a utilities class that will have multiple applications 
+thoughout the program. These will have JavaDoc for further reading of the method and class functionality
+but essentially they will do what the name describes. 
+
+CRCMain - main class of the program. has other methods to set up initial interface and UI. 
+
+CRCCalculator - class for calculating the CRC and appending it to the end of the file. 
+
+CRCValidator - class for validating the CRC 
+
+Utilities - class for tools used throughout the program. 
+
+executables 
+
+a .jar file will be supplied within the zip. therefore it should be a simple double click straight to 
+the terminal. If for any reason that this doesn't happen, then I am a horrible package distributor and 
+should be flogged. 
+
+I am using Intellij Idea 15 for reference to package manager. 
+
+Java 8 JDK used as well for further troubleshooting. 
+
 MORE DETAILS SOON (04.06.16)
+
+
