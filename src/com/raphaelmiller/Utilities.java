@@ -1,5 +1,7 @@
 package com.raphaelmiller;
 
+import java.util.BitSet;
+
 /**
  * Created by raphael on 4/6/16.
  *
@@ -9,6 +11,8 @@ package com.raphaelmiller;
  */
 public class Utilities {
 
+    BitSet bits = new BitSet(16);
+
     public String convertHextoBin(String hexVal){
         //convert String hex to bin String
         String bin = null;
@@ -16,9 +20,16 @@ public class Utilities {
         return bin;
     }
 
-    public String convertBintoHex(String binVal){
+    public String convertBintoHex(BitSet binVal){
         //convert String bin to String hex
+        binVal.set(16);
+
+        System.out.println();
+
+
         String hex = null;
+
+
 
         return hex;
     }

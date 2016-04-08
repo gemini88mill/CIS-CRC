@@ -13,9 +13,17 @@
 package com.raphaelmiller;
 
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.BitSet;
 import java.util.Scanner;
 
 public class CRCMain {
+
+    // CRC polynomial = "x16 + x10 + x8 + x7 + x3 + 1"
+    //CRC polynomial conversion = 1000 0010 1100 0100 1
 
     public static void main(String[] args) {
 	// write your code here
@@ -24,9 +32,14 @@ public class CRCMain {
 
         CRCMain crcMain = new CRCMain();
 
+        crcMain.acceptFileName();
         crcMain.generateMenu(); //menu generator. Only prints to screen :) 
         mainMenuChoice = crcMain.acceptMenuInput(); //accepts menu input
         crcMain.crcMenuSwitch(mainMenuChoice); //switch method for main menu
+
+        Utilities utilities = new Utilities();
+
+        utilities.convertBintoHex(new BitSet(16));
 
         //System.out.println(mainMenuChoice);
 
@@ -51,6 +64,7 @@ public class CRCMain {
                 exitFunction();
                 break;
             case 4:
+                //easter egg (if enough time)
                 break;
             default:
                 //invalid number go to menu
@@ -97,11 +111,34 @@ public class CRCMain {
      *      3. Exit
      */
     private void generateMenu() {
-        System.out.println("Enter the name of the file you want to check:");
+
         System.out.println("------------Menu------------------");
         System.out.println("1. Calculate CRC");
         System.out.println("2. Verify CRC");
         System.out.println("3. Exit");
         System.out.println("Choose from the above menu");
+    }
+
+    private void acceptFileName(){
+        String CRCFileName = null;
+        boolean fileIsValid = false;
+
+        System.out.println("Enter the name of the file you want to check:");
+        Scanner scan = new Scanner(System.in);
+        File CRCFile = null;
+        FileReader CRCFileReader = null;
+
+
+            CRCFileName = scan.next();
+            //System.out.println(CRCFileName);
+            CRCFile = new File(CRCFileName);
+            try {
+                CRCFileReader = new FileReader(CRCFile);
+                CRCFileReader.read();
+            } catch (IOException e) {
+                System.err.println("Error: Incorrect file path or file cannot be read");
+                acceptFileName();
+            }
+
     }
 }
