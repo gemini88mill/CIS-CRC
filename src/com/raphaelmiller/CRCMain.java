@@ -14,7 +14,6 @@ package com.raphaelmiller;
 
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.BitSet;
@@ -32,14 +31,20 @@ public class CRCMain {
 
         CRCMain crcMain = new CRCMain();
 
-        crcMain.acceptFileName();
-        crcMain.generateMenu(); //menu generator. Only prints to screen :) 
-        mainMenuChoice = crcMain.acceptMenuInput(); //accepts menu input
-        crcMain.crcMenuSwitch(mainMenuChoice); //switch method for main menu
+        //crcMain.acceptFileName();
+        //crcMain.generateMenu(); //menu generator. Only prints to screen :)
+        //mainMenuChoice = crcMain.acceptMenuInput(); //accepts menu input
+        //crcMain.crcMenuSwitch(mainMenuChoice); //switch method for main menu
 
         Utilities utilities = new Utilities();
 
-        utilities.convertBintoHex(new BitSet(16));
+        String hex = utilities.convertBinToHex("00010100010101");
+        String bin = utilities.convertHextoBin("12B");
+
+        System.out.println(hex);
+        System.out.println(bin);
+
+        utilities.exclusiveOr("0110", "1001");
 
         //System.out.println(mainMenuChoice);
 
