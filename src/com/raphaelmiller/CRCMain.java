@@ -22,6 +22,7 @@ public class CRCMain {
     //CRC polynomial conversion = 1000 0010 1100 0100 1
 
     private File CRCFileHex;
+    private StringBuilder bin4bitString;
 
     public static void main(String[] args) {
 	// write your code here
@@ -117,16 +118,17 @@ public class CRCMain {
     private void printCRCFileBin(StringBuilder CRCblock) {
         String[] lines = CRCblock.toString().split("\\n");
         Utilities util = new Utilities();
+        StringBuilder bitString = new StringBuilder();
 
         for(int i = 0; i < lines.length; i++)
             for (int k = 0; k < lines[i].length(); k++) {
-                System.out.print(lines[i].charAt(k) + " ");
+                //System.out.print(lines[i].charAt(k) + " ");
                 char token = lines[i].charAt(k);
                 String s = util.convertHextoBin(Character.toString(token));
                 System.out.print(s + " ");
+                bitString.append(s);
             }
-
-
+        setBin4bitString(bitString);
     }
 
 
@@ -207,5 +209,13 @@ public class CRCMain {
 
     public void setCRCFileHex(File CRCFileHex) {
         this.CRCFileHex = CRCFileHex;
+    }
+
+    public StringBuilder getBin4bitString() {
+        return bin4bitString;
+    }
+
+    public void setBin4bitString(StringBuilder bin4bitString) {
+        this.bin4bitString = bin4bitString;
     }
 }
