@@ -51,5 +51,12 @@ public class Utilities {
         return line.toCharArray();
     }
 
+    public String leftpad(String s){
+        return String.format("%4s", s).replace(" ", "0");
+    }
+
+    public String rightpad(String s){
+        return String.format("%16s", s).replace(" ", "0");
+    }
 
 }
