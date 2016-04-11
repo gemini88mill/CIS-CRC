@@ -5,5 +5,7 @@ package com.raphaelmiller;
  */
 public class CRCVerification {
     public void enter() {
+
+        //todo see calculation on implementation
     }
 }

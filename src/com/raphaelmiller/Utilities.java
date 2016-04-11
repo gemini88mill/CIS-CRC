@@ -53,6 +53,7 @@ public class Utilities {
 
     public String leftpad(String s, int n){
         return String.format("%1$" + n + "s", s).replace(' ', '0');
+        //todo issues with left pad, sometimes works, sometimes doesn't work. 
     }
 
     public String rightpad(String s, String regex){

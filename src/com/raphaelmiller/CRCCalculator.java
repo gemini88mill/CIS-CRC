@@ -52,6 +52,6 @@ public class CRCCalculator {
         //messagebit32 = util.leftpad(messagebit32, 1);
         System.out.println(util.leftpad(messagebit32, 1));
 
-
+        //todo crc calculator depending on left pad implementation. basic structure is simple. line up both strings, XOR, recurse and print
     }
 }
