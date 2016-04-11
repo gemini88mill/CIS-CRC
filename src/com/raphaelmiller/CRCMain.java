@@ -31,10 +31,10 @@ public class CRCMain {
 
         CRCMain crcMain = new CRCMain();
 
-        //crcMain.acceptFileName();
-        //crcMain.generateMenu(); //menu generator. Only prints to screen :)
-        //mainMenuChoice = crcMain.acceptMenuInput(); //accepts menu input
-        //crcMain.crcMenuSwitch(mainMenuChoice); //switch method for main menu
+        crcMain.acceptFileName();
+        crcMain.generateMenu(); //menu generator. Only prints to screen :)
+        mainMenuChoice = crcMain.acceptMenuInput(); //accepts menu input
+        crcMain.crcMenuSwitch(mainMenuChoice); //switch method for main menu
 
         Utilities utilities = new Utilities();
 

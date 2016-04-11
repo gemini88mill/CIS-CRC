@@ -32,8 +32,8 @@ public class Utilities {
      * @return
      */
     public String convertBinToHex(String binVal){
-        //convert String bin to String hex
-        return new BigInteger(binVal, 16).toString();
+        int decimal = Integer.parseInt(binVal, 2);
+        return Integer.toString(decimal, 16);
     }
 
     public String exclusiveOr(String bin1, String bin2){
@@ -42,9 +42,9 @@ public class Utilities {
         BigInteger secondVal = new BigInteger(bin2, 2);
 
         BigInteger finalVal = firstVal.xor(secondVal);
-        System.out.println(finalVal);
+        System.out.println(finalVal.toString(2));
 
-        return xorResult;
+        return finalVal.toString(2);
     }
 
 
