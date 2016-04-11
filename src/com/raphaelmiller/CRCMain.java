@@ -13,16 +13,15 @@
 package com.raphaelmiller;
 
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.BitSet;
+import java.io.*;
 import java.util.Scanner;
 
 public class CRCMain {
 
     // CRC polynomial = "x16 + x10 + x8 + x7 + x3 + 1"
     //CRC polynomial conversion = 1000 0010 1100 0100 1
+
+    private File CRCFileHex;
 
     public static void main(String[] args) {
 	// write your code here
@@ -31,11 +30,20 @@ public class CRCMain {
 
         CRCMain crcMain = new CRCMain();
 
-        crcMain.acceptFileName();
+        //accept file and file existence checker.
+        File CRCFile = crcMain.acceptFileName();
+        crcMain.setCRCFileHex(CRCFile);
+
+        //menu generator
         crcMain.generateMenu(); //menu generator. Only prints to screen :)
+
+        //System.in input for menu choice.
         mainMenuChoice = crcMain.acceptMenuInput(); //accepts menu input
+
+        //choice switch
         crcMain.crcMenuSwitch(mainMenuChoice); //switch method for main menu
 
+        //utilities testers.
         Utilities utilities = new Utilities();
 
         String hex = utilities.convertBinToHex("00010100010101");
@@ -59,7 +67,7 @@ public class CRCMain {
         switch (mainMenuChoice){
             case 1:
                 //calculate CRC selected
-
+                printCRCFileHex();
                 break;
             case 2:
                 //Verify CRC selected
@@ -79,6 +87,29 @@ public class CRCMain {
         }
 
     }
+
+    private void printCRCFileHex() {
+        //prints out the CRC file onto output.
+
+        //getfile
+        File CRCFile = getCRCFileHex();
+        String line = null;
+        int c;
+
+        try {
+            FileReader CRCReader = new FileReader(CRCFile.getName());
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(CRCFile)));
+
+            while((line = br.readLine()) != null){
+                System.out.println(line);
+                //prints out the entire file (original)
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     /**
      * exitFunction - Safe program exit
@@ -124,7 +155,7 @@ public class CRCMain {
         System.out.println("Choose from the above menu");
     }
 
-    private void acceptFileName(){
+    private File acceptFileName(){
         String CRCFileName = null;
         boolean fileIsValid = false;
 
@@ -144,6 +175,18 @@ public class CRCMain {
                 System.err.println("Error: Incorrect file path or file cannot be read");
                 acceptFileName();
             }
+        //return file
+        return CRCFile;
+    }
 
+    //--------------------------getters and setters-------------------------------------------------------
+
+
+    public File getCRCFileHex() {
+        return CRCFileHex;
+    }
+
+    public void setCRCFileHex(File CRCFileHex) {
+        this.CRCFileHex = CRCFileHex;
     }
 }
