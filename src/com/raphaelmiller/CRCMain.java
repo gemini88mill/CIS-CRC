@@ -33,7 +33,7 @@ public class CRCMain {
         CRCCalculator calculator = new CRCCalculator();
         CRCVerification verify = new CRCVerification();
 
-        
+        calculator.enter(new StringBuilder());
 
 
 //        //accept file and file existence checker.
@@ -133,7 +133,7 @@ public class CRCMain {
                 String s = util.convertHextoBin(Character.toString(token));
                 if(s.length() < 4){
                     //System.out.print(" PAD ");
-                    s = util.leftpad(s);
+                    s = util.leftpad(s, 4);
                 }
                 System.out.print(s + " ");
 

@@ -5,7 +5,12 @@ package com.raphaelmiller;
  */
 public class CRCCalculator {
 
+    private String messageBit32Test = "11111111111111111111111111111111";
+    private String polyBitsTest = "10000010110001001";
+
     public void enter(StringBuilder bin4bitString) {
+
+        calculate(messageBit32Test, polyBitsTest);
 
 //        String[] builderToken = bin4bitString.toString().split("\\s+");
 //
@@ -35,12 +40,17 @@ public class CRCCalculator {
     }
 
     private void calculate(String messagebit32, String polynomialBits){
+        Utilities util = new Utilities();
+
         //messagebit32 = 32 bits, polynomialbits = 17 bits
 
         //messagebit32 is padded by 16 bits
+        String messageShifter;
 
-        //tester variable
-        messagebit32 = "1111 1111 1111 1111 1111 1111 1111 1111";
+        System.out.println(messagebit32);
+        //messagebit32 = messagebit32.substring(0, messagebit32.length() - 1);
+        //messagebit32 = util.leftpad(messagebit32, 1);
+        System.out.println(util.leftpad(messagebit32, 1));
 
 
     }
