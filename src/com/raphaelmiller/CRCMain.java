@@ -116,16 +116,15 @@ public class CRCMain {
 
     private void printCRCFileBin(StringBuilder CRCblock) {
         String[] lines = CRCblock.toString().split("\\n");
+        Utilities util = new Utilities();
 
-
-        for(int i = 0; i < lines.length; i++){
-            char[] stringTokens = lines[i].toCharArray();
-
-            //stringtokens works
-            for(int k = 0; k < stringTokens.length; k++){
-                System.out.print(stringTokens[k] + " ");
+        for(int i = 0; i < lines.length; i++)
+            for (int k = 0; k < lines[i].length(); k++) {
+                System.out.print(lines[i].charAt(k) + " ");
+                char token = lines[i].charAt(k);
+                String s = util.convertHextoBin(Character.toString(token));
+                System.out.print(s + " ");
             }
-        }
 
 
     }
