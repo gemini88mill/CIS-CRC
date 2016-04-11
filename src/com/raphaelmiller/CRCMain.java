@@ -94,6 +94,7 @@ public class CRCMain {
         //getfile
         File CRCFile = getCRCFileHex();
         String line = null;
+        StringBuilder CRCblock = new StringBuilder();
         int c;
 
         try {
@@ -101,13 +102,32 @@ public class CRCMain {
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(CRCFile)));
 
             while((line = br.readLine()) != null){
-                System.out.println(line);
+                System.out.println(line + "\n\n");
                 //prints out the entire file (original)
+                CRCblock.append(line);
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        printCRCFileBin(CRCblock);
+    }
+
+    private void printCRCFileBin(StringBuilder CRCblock) {
+        String[] lines = CRCblock.toString().split("\\n");
+
+
+        for(int i = 0; i < lines.length; i++){
+            char[] stringTokens = lines[i].toCharArray();
+
+            //stringtokens works
+            for(int k = 0; k < stringTokens.length; k++){
+                System.out.print(stringTokens[k] + " ");
+            }
+        }
+
+
     }
 
 

@@ -47,5 +47,9 @@ public class Utilities {
         return finalVal.toString(2);
     }
 
+    public char[] StringBreaker(String line){
+        return line.toCharArray();
+    }
+
 
 }
