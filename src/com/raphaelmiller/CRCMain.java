@@ -14,7 +14,9 @@ package com.raphaelmiller;
 
 
 import java.io.*;
+import java.math.BigInteger;
 import java.util.Scanner;
+import java.util.StringJoiner;
 
 public class CRCMain {
 
@@ -23,6 +25,9 @@ public class CRCMain {
 
     private File CRCFileHex;
     private StringBuilder bin4bitString;
+
+
+
 
     public static void main(String[] args) {
 	// write your code here
@@ -47,7 +52,8 @@ public class CRCMain {
         mainMenuChoice = crcMain.acceptMenuInput(); //accepts menu input
 
         //starts the file output (hex and bin) thread
-        crcMain.printCRCFileHex();
+        StringBuilder CRCHex = crcMain.printCRCFileHex();
+        crcMain.printCRCFileBin(CRCHex);
 
         //choice switch
         crcMain.crcMenuSwitch(mainMenuChoice); //switch method for main menu
@@ -95,7 +101,7 @@ public class CRCMain {
 
     }
 
-    private void printCRCFileHex() {
+    private StringBuilder printCRCFileHex() {
         //prints out the CRC file onto output.
 
         //getfile
@@ -110,7 +116,7 @@ public class CRCMain {
 
             while((line = br.readLine()) != null){
                 System.out.print("The Input File (Hex): ");
-                System.out.println(line + "\n\n");
+                System.out.println(line);
                 //prints out the entire file (original)
                 CRCblock.append(line);
             }
@@ -119,8 +125,28 @@ public class CRCMain {
             e.printStackTrace();
         }
 
-
+        return CRCblock;
     }
+
+    private void printCRCFileBin(StringBuilder CRCHex){
+        //accepts a hex string and turns it into a bin string
+//        BigInteger hexvalue = new BigInteger(CRCHex.toString(), 16);
+//        System.out.println(hexvalue.toString(2));
+
+
+        System.out.println("The Input File(Bin): ");
+        char[] hexSplitter = CRCHex.toString().toCharArray();
+        for(int i = 0; i < hexSplitter.length; i++) {
+
+            if((i % 8) == 0 && i != 0){
+                System.out.println();
+            }
+            int binHold = Integer.parseInt(Character.toString(hexSplitter[i]),16);
+            System.out.print(String.format("%04d", Integer.parseInt(Integer.toBinaryString(binHold))) + " ");
+
+        }
+    }
+
 
 
 
