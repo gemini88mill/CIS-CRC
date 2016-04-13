@@ -14,15 +14,22 @@ package com.raphaelmiller;
 
 
 import java.io.*;
+import java.nio.ByteBuffer;
 import java.util.Scanner;
 
 public class CRCMain {
+
+    public static final String POLYNOMIAL_BIN_VALUE = "10000010110001001";
+    public static final int POLY_LENGTH = 17;
+    public static final int PAD = 16;
 
     // CRC polynomial = "x16 + x10 + x8 + x7 + x3 + 1"
     //CRC polynomial conversion = 1000 0010 1100 0100 1
 
     private File CRCFileHex;
     private StringBuilder bin4bitString;
+    private String binString;
+
 
 
 
@@ -52,10 +59,10 @@ public class CRCMain {
         //starts the file output (hex and bin) thread
         StringBuilder CRCHex = crcMain.printCRCFileHex();
         String binString = crcMain.printCRCFileBin(CRCHex);
+        crcMain.setBinString(binString);
 
-        System.out.println("\n" + binString);
+        //System.out.println("\n" + crcMain.getBinString());
 
-        String[] binString32 = crcMain.chopString(binString);
 
         //choice switch
         crcMain.crcMenuSwitch(mainMenuChoice); //switch method for main menu
@@ -67,11 +74,6 @@ public class CRCMain {
 
         //System.out.println(mainMenuChoice);
 
-    }
-
-    private String[] chopString(String binString) {
-
-        return null;
     }
 
     /**
@@ -86,7 +88,7 @@ public class CRCMain {
         switch (mainMenuChoice){
             case 1:
                 //calculate CRC selected
-
+                CRCCalculate();
                 break;
             case 2:
                 //Verify CRC selected
@@ -105,6 +107,52 @@ public class CRCMain {
                 generateMenu();
                 break;
         }
+
+    }
+
+    /**
+     * 
+     */
+    private void CRCCalculate() {
+        //calculates CRC
+        String binString = getBinString();
+        String poly = POLYNOMIAL_BIN_VALUE;
+        String register = "0000000000000000";
+
+        //binString = binString + register;
+
+        int binVal = Integer.parseInt(binString, 2);
+        int polyVal = Integer.parseInt(poly, 2);
+        int emptyRegister = Integer.parseInt(register, 2);
+
+        binVal = binVal << 16;
+
+        byte[] CRCArray = ByteBuffer.allocate(binString.length()).putInt(binVal).array();
+        byte[] polyArray = ByteBuffer.allocate(POLY_LENGTH).putInt(polyVal).array();
+        byte[] registerBytes = {0, 0};
+        byte pop;
+
+        int top = 0;
+
+        while (top < CRCArray.length - 1) {
+            CRCArray[top] = registerBytes[1];
+            registerBytes[0] = registerBytes[1];
+            pop = registerBytes[0];
+
+            if (pop != 0) {
+                registerBytes[0] = (byte) (registerBytes[0] ^ polyArray[0]);
+                registerBytes[1] = (byte) (registerBytes[1] ^ polyArray[1]);
+            }
+            top++;
+            //System.out.println(CRCArray[top]);
+        }
+        StringBuilder hexResult;
+        for (int i = 0; i < CRCArray.length; i++){
+            System.out.println(CRCArray[i]);
+        }
+
+        //System.out.println((String.format("%016d", binVal)));
+
 
     }
 
@@ -165,12 +213,13 @@ public class CRCMain {
             }
             int binHold = Integer.parseInt(Character.toString(hexSplitter[i]),16);
             binString.append(String.format("%04d", Integer.parseInt(Integer.toBinaryString(binHold))));
+            //binString.append(" ");
             System.out.print(String.format("%04d", Integer.parseInt(Integer.toBinaryString(binHold))) + " ");
             //System.out.print(binString + " ");
 
         }
 
-        //System.out.println("\n");
+        System.out.println();
 
 
 
@@ -267,5 +316,13 @@ public class CRCMain {
 
     public void setBin4bitString(StringBuilder bin4bitString) {
         this.bin4bitString = bin4bitString;
+    }
+
+    public String getBinString() {
+        return binString;
+    }
+
+    public void setBinString(String binString) {
+        this.binString = binString;
     }
 }
