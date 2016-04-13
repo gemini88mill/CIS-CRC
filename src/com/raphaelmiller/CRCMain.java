@@ -30,30 +30,30 @@ public class CRCMain {
         int mainMenuChoice = 0;
 
         CRCMain crcMain = new CRCMain();
-        CRCCalculator calculator = new CRCCalculator();
-        CRCVerification verify = new CRCVerification();
-
-        calculator.enter(new StringBuilder());
 
 
-//        //accept file and file existence checker.
-//        File CRCFile = crcMain.acceptFileName();
-//        crcMain.setCRCFileHex(CRCFile);
-//
-//        //menu generator
-//        crcMain.generateMenu(); //menu generator. Only prints to screen :)
-//
-//        //System.in input for menu choice.
-//        mainMenuChoice = crcMain.acceptMenuInput(); //accepts menu input
-//
-//        //starts the file output (hex and bin) thread
-//        crcMain.printCRCFileHex();
-//
-//        //choice switch
-//        crcMain.crcMenuSwitch(mainMenuChoice); //switch method for main menu
-//
-//        //utilities testers.
-//        Utilities utilities = new Utilities();
+
+        //calculator.enter(new StringBuilder());
+
+
+        //accept file and file existence checker.
+        File CRCFile = crcMain.acceptFileName();
+        crcMain.setCRCFileHex(CRCFile);
+
+        //menu generator
+        crcMain.generateMenu(); //menu generator. Only prints to screen :)
+
+        //System.in input for menu choice.
+        mainMenuChoice = crcMain.acceptMenuInput(); //accepts menu input
+
+        //starts the file output (hex and bin) thread
+        crcMain.printCRCFileHex();
+
+        //choice switch
+        crcMain.crcMenuSwitch(mainMenuChoice); //switch method for main menu
+
+        //utilities testers.
+
 
 
 
@@ -66,18 +66,18 @@ public class CRCMain {
      * @param mainMenuChoice
      */
     private void crcMenuSwitch(int mainMenuChoice) {
-        CRCCalculator calc = new CRCCalculator();
-        CRCVerification verify = new CRCVerification();
+
+
 
         //System.out.println(mainMenuChoice); //verified menu option.
         switch (mainMenuChoice){
             case 1:
                 //calculate CRC selected
-                calc.enter(getBin4bitString());
+
                 break;
             case 2:
                 //Verify CRC selected
-                verify.enter();
+
                 break;
             case 3:
                 //Exit selected 
@@ -109,6 +109,7 @@ public class CRCMain {
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(CRCFile)));
 
             while((line = br.readLine()) != null){
+                System.out.print("The Input File (Hex): ");
                 System.out.println(line + "\n\n");
                 //prints out the entire file (original)
                 CRCblock.append(line);
@@ -118,33 +119,10 @@ public class CRCMain {
             e.printStackTrace();
         }
 
-        printCRCFileBin(CRCblock);
+
     }
 
-    private void printCRCFileBin(StringBuilder CRCblock) {
-        String[] lines = CRCblock.toString().split("\\n");
-        Utilities util = new Utilities();
-        StringBuilder bitString = new StringBuilder();
 
-        for(int i = 0; i < lines.length; i++)
-            for (int k = 0; k < lines[i].length(); k++) {
-                //System.out.print(lines[i].charAt(k) + " ");
-                char token = lines[i].charAt(k);
-                String s = util.convertHextoBin(Character.toString(token));
-                if(s.length() < 4){
-                    //System.out.print(" PAD ");
-                    s = util.leftpad(s, 4);
-                }
-                System.out.print(s + " ");
-
-                if((k % 8) == 0){
-                    System.out.println();
-                }
-                bitString.append(s);
-                bitString.append(' ');
-            }
-        setBin4bitString(bitString);
-    }
 
 
     /**

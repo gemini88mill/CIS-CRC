@@ -24,9 +24,13 @@ Utilities - class for tools used throughout the program.
 
 executables 
 
-a .jar file will be supplied within the zip. therefore it should be a simple double click straight to 
+a .java file will be supplied within the zip. therefore it should be a simple double click straight to
 the terminal. If for any reason that this doesn't happen, then I am a horrible package distributor and 
-should be flogged. 
+should be flogged.
+
+INSTRUCTIONS FOR USE!!!
+
+replace your file with the testfilepath.txt and run the program in any terminal.
 
 I am using Intellij Idea 15 for reference to package manager. 
 
