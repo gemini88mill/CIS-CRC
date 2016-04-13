@@ -14,9 +14,7 @@ package com.raphaelmiller;
 
 
 import java.io.*;
-import java.math.BigInteger;
 import java.util.Scanner;
-import java.util.StringJoiner;
 
 public class CRCMain {
 
@@ -53,7 +51,7 @@ public class CRCMain {
 
         //starts the file output (hex and bin) thread
         StringBuilder CRCHex = crcMain.printCRCFileHex();
-        crcMain.printCRCFileBin(CRCHex);
+        String binString = crcMain.printCRCFileBin(CRCHex);
 
         //choice switch
         crcMain.crcMenuSwitch(mainMenuChoice); //switch method for main menu
@@ -101,6 +99,12 @@ public class CRCMain {
 
     }
 
+    /**
+     * printCRCFileHex() - method that returns a StringBuilder of the hex value from a file
+     *
+     *
+     * @return StringBuilder
+     */
     private StringBuilder printCRCFileHex() {
         //prints out the CRC file onto output.
 
@@ -128,11 +132,18 @@ public class CRCMain {
         return CRCblock;
     }
 
-    private void printCRCFileBin(StringBuilder CRCHex){
+    /**
+     * printCRCFileBin() - takes a hex String and converts to binary, and prints out binary representation.
+     * returns String of binary. 
+     *
+     * @param CRCHex
+     * @return String
+     */
+    private String printCRCFileBin(StringBuilder CRCHex){
         //accepts a hex string and turns it into a bin string
 //        BigInteger hexvalue = new BigInteger(CRCHex.toString(), 16);
 //        System.out.println(hexvalue.toString(2));
-
+        String binString = null;
 
         System.out.println("The Input File(Bin): ");
         char[] hexSplitter = CRCHex.toString().toCharArray();
@@ -142,9 +153,13 @@ public class CRCMain {
                 System.out.println();
             }
             int binHold = Integer.parseInt(Character.toString(hexSplitter[i]),16);
-            System.out.print(String.format("%04d", Integer.parseInt(Integer.toBinaryString(binHold))) + " ");
-
+            binString = String.format("%04d", Integer.parseInt(Integer.toBinaryString(binHold)));
+            //System.out.print(String.format("%04d", Integer.parseInt(Integer.toBinaryString(binHold))) + " ");
+            System.out.print(binString + " ");
         }
+
+        //System.out.println(binString + "done");
+        return binString;
     }
 
 
