@@ -152,12 +152,8 @@ public class CRCMain {
         //accepts a hex string and turns it into a bin string
 //        BigInteger hexvalue = new BigInteger(CRCHex.toString(), 16);
 //        System.out.println(hexvalue.toString(2));
-        String binString = null;
-        int chopCounter = 0;
-        StringBuilder[] binString32 = new StringBuilder[CRCHex.length()];
-        for(int l = 0; l < (CRCHex.length() / 8 + 1); l++){
-            binString32[l] = new StringBuilder();
-        }
+        StringBuilder binString = new StringBuilder();
+
 
         System.out.println("The Input File(Bin): ");
         char[] hexSplitter = CRCHex.toString().toCharArray();
@@ -165,24 +161,21 @@ public class CRCMain {
 
             if((i % 8) == 0 && i != 0){
                 System.out.println();
-                chopCounter++;
+
             }
             int binHold = Integer.parseInt(Character.toString(hexSplitter[i]),16);
-            binString = String.format("%04d", Integer.parseInt(Integer.toBinaryString(binHold)));
-            binString32[chopCounter].append(binString);
-            //System.out.print(String.format("%04d", Integer.parseInt(Integer.toBinaryString(binHold))) + " ");
-            System.out.print(binString + " ");
+            binString.append(String.format("%04d", Integer.parseInt(Integer.toBinaryString(binHold))));
+            System.out.print(String.format("%04d", Integer.parseInt(Integer.toBinaryString(binHold))) + " ");
+            //System.out.print(binString + " ");
 
         }
 
-        System.out.println("\n");
+        //System.out.println("\n");
 
-        for(int k = 0; k < binString32.length; k++){
-            System.out.println(binString32[k]);
-        }
+
 
         //System.out.println(binString + "done");
-        return binString;
+        return binString.toString();
     }
 
 
